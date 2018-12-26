@@ -29,3 +29,8 @@
   node ./wc.js -c -w -l file1 [file2]...
   node ./wc.js -c -l -w file1 [file2]...
 */
+
+const { wc } = require('./src/lib.js');
+const fs = require('fs');
+let fileName = process.argv[2];
+process.stdout.write(wc(fileName, fs));
