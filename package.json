@@ -1,0 +1,22 @@
+{
+  "name": "wc.js",
+  "version": "1.0.0",
+  "description": "wc using javascript",
+  "main": "wc.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/wc-deepikabartwal.git"
+  },
+  "author": "Deepika Bartwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/wc-deepikabartwal/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/wc-deepikabartwal#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
