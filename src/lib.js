@@ -1,5 +1,4 @@
 const { NEWLINE, SPACE, TAB, EMPTY } = require('./constant.js');
-const { defaultFormatter, singleOptionFormatter } = require('./formatter.js');
 const { parseArgs } = require('./parser.js');
 const splitContent = require('./util.js').splitContent;
 
@@ -17,29 +16,21 @@ const countBytes = function(content) {
   return fetchBytes(content).length;
 };
 
-const getAllCounts = function(content) {
-  let lineCount = countLines(content);
-  let wordCount = countWords(content);
-  let byteCount = countBytes(content);
-  return { lineCount, wordCount, byteCount };
-};
-
-const getCounter = function(type) {
-  const counters = {
-    all: getAllCounts,
-    '-l': countLines,
-    '-w': countWords,
-    '-c': countBytes
-  };
-  return counters[type];
-};
-
 const wc = function(args, fs) {
-  let { option, formatter, fileName } = parseArgs(args);
-  let content = fs.readFileSync(fileName, 'utf-8');
-  let counter = getCounter(option);
-  let result = counter(content);
-  return formatter(result, fileName);
+  let { files, options } = parseArgs(args);
+  let content = fs.readFileSync(files[0], 'utf-8');
+  let countList = [];
+  if (options.includes('l')) {
+    countList.push(countLines(content));
+  }
+  if (options.includes('w')) {
+    countList.push(countWords(content));
+  }
+  if (options.includes('c')) {
+    countList.push(countBytes(content));
+  }
+  countList.push(files[0]);
+  return countList.join('\t');
 };
 
 module.exports = {
