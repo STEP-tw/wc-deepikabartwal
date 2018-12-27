@@ -32,5 +32,5 @@
 
 const { wc } = require('./src/lib.js');
 const fs = require('fs');
-let fileName = process.argv[2];
-process.stdout.write(wc(fileName, fs));
+let args = process.argv.slice(2);
+process.stdout.write(wc(args, fs));
