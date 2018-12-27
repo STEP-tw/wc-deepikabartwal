@@ -21,24 +21,24 @@ describe('wc', () => {
   describe('for default arguments', () => {
     it('should return number of lines, words and bytes in a file for default command', () => {
       let actual = wc(['oneLine.txt'], fs);
-      let expectedOutput = '\t0\t4\t16 oneLine.txt';
+      let expectedOutput = ['0', '4', '16', 'oneLine.txt'].join('\t');
       assert.equal(actual, expectedOutput);
     });
   });
   describe('for option specified', () => {
     it('should return number of lines in a file when -l is mentioned', () => {
       let actual = wc(['-l', 'oneLine.txt'], fs);
-      let expectedOutput = '\t0 oneLine.txt';
+      let expectedOutput = ['0', 'oneLine.txt'].join('\t');
       assert.equal(actual, expectedOutput);
     });
     it('should return number of words in a file when -w is mentioned', () => {
       let actual = wc(['-w', 'oneLine.txt'], fs);
-      let expectedOutput = '\t4 oneLine.txt';
+      let expectedOutput = ['4', 'oneLine.txt'].join('\t');
       assert.equal(actual, expectedOutput);
     });
     it('should return number of bytes in a file when -w is mentioned', () => {
       let actual = wc(['-c', 'oneLine.txt'], fs);
-      let expectedOutput = '\t16 oneLine.txt';
+      let expectedOutput = ['16', 'oneLine.txt'].join('\t');
       assert.equal(actual, expectedOutput);
     });
   });
