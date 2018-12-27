@@ -134,5 +134,35 @@ describe('wc', () => {
       let expectedOutput = ['', '4', '16', 'oneLine.txt'].join(TAB);
       assert.equal(actual, expectedOutput);
     });
+    it('should count words, lines and bytes when -l -c -w is specified', () => {
+      let actual = wc(['-l', '-c', '-w', 'oneLine.txt'], fs);
+      let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
+      assert.equal(actual, expectedOutput);
+    });
+    it('should count words, lines and bytes when -l -w -c is specified', () => {
+      let actual = wc(['-l', '-w', '-c', 'oneLine.txt'], fs);
+      let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
+      assert.equal(actual, expectedOutput);
+    });
+    it('should count words, lines and bytes when -c -l -w is specified', () => {
+      let actual = wc(['-c', '-l', '-w', 'oneLine.txt'], fs);
+      let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
+      assert.equal(actual, expectedOutput);
+    });
+    it('should count words, lines and bytes when -l -c -w is specified', () => {
+      let actual = wc(['-l', '-c', '-w', 'oneLine.txt'], fs);
+      let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
+      assert.equal(actual, expectedOutput);
+    });
+    it('should count words, lines and bytes when -l -w -c is specified', () => {
+      let actual = wc(['-l', '-w', '-c', 'oneLine.txt'], fs);
+      let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
+      assert.equal(actual, expectedOutput);
+    });
+    it('should count words, lines and bytes when -c -l -w is specified', () => {
+      let actual = wc(['-c', '-l', '-w', 'oneLine.txt'], fs);
+      let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
+      assert.equal(actual, expectedOutput);
+    });
   });
 });
