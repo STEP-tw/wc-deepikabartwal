@@ -1,35 +1,77 @@
+const { NEWLINE, SPACE, TAB, EMPTY } = require('./constant.js');
+
+const splitContent = function(delimiter, content) {
+  return content.split(delimiter);
+};
+
+const fetchWords = splitContent.bind(null, /[ \n]+/);
+const fetchLines = splitContent.bind(null, NEWLINE);
+const fetchBytes = splitContent.bind(null, EMPTY);
+
 const countLines = function(content) {
-  let lines = content.split('\n');
-  let lineCount = lines.length - 1;
-  return lineCount;
+  return fetchLines(content).length - 1;
 };
 
 const countWords = function(content) {
-  let words = content
-    .split('\n')
-    .join(' ')
-    .split(' ');
-  let wordCount = words.filter(element => !element == ' ').length;
-  return wordCount;
+  return fetchWords(content).length;
 };
 
 const countBytes = function(content) {
-  let characters = content.split('');
-  let byteCount = characters.length;
-  return byteCount;
+  return fetchBytes(content).length;
 };
 
-const formatOutput = function(lineCount, wordCount, byteCount) {
-  return '\t' + lineCount + '\t' + wordCount + '\t' + byteCount;
-};
-
-const wc = function(fileName, fs) {
-  let content = fs.readFileSync(fileName, 'utf-8');
+const getAllCounts = function(content) {
   let lineCount = countLines(content);
   let wordCount = countWords(content);
   let byteCount = countBytes(content);
-  return formatOutput(lineCount, wordCount, byteCount) + ' ' + fileName;
+  return { lineCount, wordCount, byteCount };
 };
+
+const defaultFormatter = function(countDetails, fileName) {
+  let { lineCount, wordCount, byteCount } = countDetails;
+  outputList = ['', lineCount, wordCount, byteCount];
+  return outputList.join(TAB) + SPACE + fileName;
+};
+
+const beginsWithDash = function(arg) {
+  return arg.startsWith('-');
+};
+
+const singleOptionFormatter = function(count, fileName) {
+  outputList = ['', count].join(TAB);
+  return [outputList, fileName].join(SPACE);
+};
+const parseArgs = function(args) {
+  const firstArg = args[0];
+  let option = 'all';
+  let formatter = defaultFormatter;
+  let fileName = args[0];
+  if (beginsWithDash(firstArg)) {
+    option = firstArg;
+    formatter = singleOptionFormatter;
+    fileName = args[1];
+  }
+  return { option, formatter, fileName };
+};
+
+const getCounter = function(type) {
+  const counters = {
+    all: getAllCounts,
+    '-l': countLines,
+    '-w': countWords,
+    '-c': countBytes
+  };
+  return counters[type];
+};
+
+const wc = function(args, fs) {
+  let { option, formatter, fileName } = parseArgs(args);
+  let content = fs.readFileSync(fileName, 'utf-8');
+  let counter = getCounter(option);
+  let result = counter(content);
+  return formatter(result, fileName);
+};
+
 module.exports = {
   wc
 };
