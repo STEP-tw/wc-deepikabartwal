@@ -16,7 +16,7 @@ const countBytes = function(content) {
   return fetchBytes(content).length;
 };
 
-const temp = function(fs, options) {
+const getRequiredCounts = function(fs, options) {
   return function(file) {
     let content = fs.readFileSync(file, 'utf-8');
     let countList = [''];
@@ -52,7 +52,7 @@ const getTotalCount = function(list1, list2) {
 
 const wc = function(args, fs) {
   let { files, options } = parseArgs(args);
-  let getCounts = temp(fs, options);
+  let getCounts = getRequiredCounts(fs, options);
   let countList = files.map(getCounts);
   if (files.length > 1) {
     let total = countList.reduce(getTotalCount);
