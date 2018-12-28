@@ -73,6 +73,8 @@ describe('wc', () => {
       let expectedOutput = ['', '4', '16', 'oneLine.txt'].join(TAB);
       assert.equal(actual, expectedOutput);
     });
+  });
+  describe('for all three option specified together', () => {
     it('should count words, lines and bytes when -lcw is specified', () => {
       let actual = wc(['-lcw', 'oneLine.txt'], fs);
       let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
@@ -103,7 +105,8 @@ describe('wc', () => {
       let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
       assert.equal(actual, expectedOutput);
     });
-
+  });
+  describe('for two options specified with space', () => {
     it('should count lines and words when -l -w is specified', () => {
       let actual = wc(['-l', '-w', 'oneLine.txt'], fs);
       let expectedOutput = ['', '0', '4', 'oneLine.txt'].join(TAB);
@@ -134,6 +137,8 @@ describe('wc', () => {
       let expectedOutput = ['', '4', '16', 'oneLine.txt'].join(TAB);
       assert.equal(actual, expectedOutput);
     });
+  });
+  describe('when all three options are specified separately with space', () => {
     it('should count words, lines and bytes when -l -c -w is specified', () => {
       let actual = wc(['-l', '-c', '-w', 'oneLine.txt'], fs);
       let expectedOutput = ['', '0', '4', '16', 'oneLine.txt'].join(TAB);
