@@ -1,6 +1,7 @@
 const { NEWLINE, SPACE, TAB, EMPTY } = require('./constant.js');
 const { parseArgs } = require('./parser.js');
 const splitContent = require('./util.js').splitContent;
+const { formatCountList } = require('./formatter.js');
 
 const countWords = content => fetchWords(content).filter(word => word).length;
 
@@ -34,13 +35,6 @@ const getRequiredCounts = function(fs, options) {
     return countList;
   };
 };
-const joinOnTab = function(list) {
-  return list.join(TAB);
-};
-
-const joinByNewline = function(list) {
-  return list.join(NEWLINE);
-};
 
 const getTotalCount = function(list1, list2) {
   let totalCountList = [''];
@@ -59,7 +53,7 @@ const wc = function(args, fs) {
     total.push('total');
     countList.push(total);
   }
-  return joinByNewline(countList.map(joinOnTab));
+  return formatCountList(countList);
 };
 
 module.exports = {
