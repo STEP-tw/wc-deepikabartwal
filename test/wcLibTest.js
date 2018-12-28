@@ -165,4 +165,27 @@ describe('wc', () => {
       assert.equal(actual, expectedOutput);
     });
   });
+  describe('for multiple files', () => {
+    it('with arguments should provide line, word and byte count and a total for multiple files', () => {
+      let actual = wc(['oneLine.txt', 'oneLine.txt'], fs);
+      let expectedOutput =
+        '\t0\t4\t16\toneLine.txt\n\t0\t4\t16\toneLine.txt\n\t0\t8\t32\ttotal';
+      assert.equal(actual, expectedOutput);
+    });
+    it('with arguments provides line counts and a total for multiple files', () => {
+      let actual = wc(['-l', 'oneLine.txt', 'oneLine.txt'], fs);
+      let expectedOutput = '\t0\toneLine.txt\n\t0\toneLine.txt\n\t0\ttotal';
+      assert.equal(actual, expectedOutput);
+    });
+    it('with arguments provides word counts and a total for multiple files', () => {
+      let actual = wc(['-w', 'oneLine.txt', 'oneLine.txt'], fs);
+      let expectedOutput = '\t4\toneLine.txt\n\t4\toneLine.txt\n\t8\ttotal';
+      assert.equal(actual, expectedOutput);
+    });
+    it('with arguments provides byte counts and a total for multiple files', () => {
+      let actual = wc(['-c', 'oneLine.txt', 'oneLine.txt'], fs);
+      let expectedOutput = '\t16\toneLine.txt\n\t16\toneLine.txt\n\t32\ttotal';
+      assert.equal(actual, expectedOutput);
+    });
+  });
 });
