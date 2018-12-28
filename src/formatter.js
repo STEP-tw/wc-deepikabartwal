@@ -1,17 +1,17 @@
-const { TAB, SPACE } = require('./constant.js');
+const { TAB, SPACE, NEWLINE } = require('./constant.js');
 
-const defaultFormatter = function(countDetails, fileName) {
-  let { lineCount, wordCount, byteCount } = countDetails;
-  outputList = ['', lineCount, wordCount, byteCount];
-  return outputList.join(TAB) + SPACE + fileName;
+const joinByTab = function(list) {
+  return list.join(TAB);
 };
 
-const singleOptionFormatter = function(count, fileName) {
-  outputList = ['', count].join(TAB);
-  return [outputList, fileName].join(SPACE);
+const joinByNewline = function(list) {
+  return list.join(NEWLINE);
+};
+
+const formatCountList = function(countList) {
+  return joinByNewline(countList.map(joinByTab));
 };
 
 module.exports = {
-  defaultFormatter,
-  singleOptionFormatter
+  formatCountList
 };
