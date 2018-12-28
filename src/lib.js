@@ -1,4 +1,4 @@
-const { NEWLINE, SPACE, TAB, EMPTY } = require('./constant.js');
+const { NEWLINE, SPACE, TAB, EMPTYSTRING } = require('./constant.js');
 const { parseArgs } = require('./parser.js');
 const splitContent = require('./util.js').splitContent;
 const { formatCountList } = require('./formatter.js');
@@ -7,7 +7,7 @@ const countWords = content => fetchWords(content).filter(word => word).length;
 
 const fetchWords = splitContent.bind(null, /[ \n]+/);
 const fetchLines = splitContent.bind(null, NEWLINE);
-const fetchBytes = splitContent.bind(null, EMPTY);
+const fetchBytes = splitContent.bind(null, EMPTYSTRING);
 
 const countLines = function(content) {
   return fetchLines(content).length - 1;
