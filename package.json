@@ -1,5 +1,5 @@
 {
-  "name": "wc.js",
+  "name": "wc",
   "version": "1.0.0",
   "description": "wc using javascript",
   "main": "wc.js",
@@ -18,5 +18,14 @@
   "homepage": "https://github.com/STEP-tw/wc-deepikabartwal#readme",
   "devDependencies": {
     "mocha": "^5.2.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "keywords": [
+    "wc",
+    "using",
+    "js"
+  ]
 }
